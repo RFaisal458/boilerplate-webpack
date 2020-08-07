@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); // Untuk render html
 
 module.exports = {
     mode: "development",
+    
+    devtool: "inline-source-map",/*When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if                                      you bundle three source files (a.js, b.js, and c.js) into one bundle (bundle.js) and one of the source files contains an error, the stack                                        trace will simply point to bundle.js. This isn't always helpful as you probably want to know exactly which source file the error came from*/
+    
     entry: ["./src/js/script.js", "./src/sass/main.scss"], // Entry File yang akan di gunakan atau template yang akan di gunakan
     devServer: { // Untuk membuat server lokal
         contentBase: path.join(__dirname, "dist"),
@@ -43,7 +46,8 @@ module.exports = {
             filename: "./css/style.css", // output nama apa yang kita inginkan dari sass yang di atas
         }),
         new HtmlWebpackPlugin({
-            template: "./src/html/index.html" // template html mana yang akan kita render
-        }),
+            template: path.resolve(__dirname, "src/html/index.html"),// template html mana yang akan kita render
+            filename: path.resolve(__dirname, "dist/index.html")
+        })
     ],
 };
