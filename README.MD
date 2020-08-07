@@ -16,8 +16,8 @@
 ## Startup
 
 1. `cd` to project directory
-1. Start environment: `npm run watch` (will create `dist` directory)
-1. Navigate to [http://localhost:9000/](http://localhost:9000/)
+3. Start environment: `npm run build` (will create `dist` directory)
+4. Navigate to [http://localhost:9000/](http://localhost:9000/)
 
   
 
