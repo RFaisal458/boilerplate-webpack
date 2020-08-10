@@ -57,6 +57,8 @@
 
 - file-loader ^6.0.0
 
+- url-loader ^4.1.0
+
   
 
 ### Reference
