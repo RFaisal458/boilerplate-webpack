@@ -17,7 +17,7 @@
 
 1. `cd` to project directory
 3. Start environment: `npm run build` (will create `dist` directory)
-4. Navigate to [http://localhost:9000/](http://localhost:9000/)
+4. Navigate to [http://localhost:4580/](http://localhost:4580/)
 
   
 
@@ -55,6 +55,8 @@
 
 - style-loader ^1.2.1
 
+- file-loader ^6.0.0
+
   
 
 ### Reference
@@ -66,6 +68,12 @@
 - https://babeljs.io/
 
 - https://github.com/webpack-contrib
+
+- https://www.npmjs.com/package/clean-webpack-plugin
+
+- https://finmavis.dev/blog/webpack-configuration-step-by-step
+
+- https://github.com/johnagan/clean-webpack-plugin
 
 - https://github.com/webpack-contrib/extract-text-webpack-plugin
 
@@ -109,3 +117,9 @@
     
 11.  **Mini Css Extract Plugin**  
     Plugin ini mengekstrak CSS ke dalam file terpisah. Ini menciptakan file CSS dari setiap file JS yang berisi CSS. Mendukung  _On-Demand-Loading_  dari CSS dan  _SourceMaps_.
+
+12.  **Url Loader**
+    Plugin ini di gunakan untuk merender sebuah image 
+
+13.  **File Loader**
+    Plugin ini pula hampir mirip dengan _Url loader_ akan tetapi tidak mendukung path yang benar biasanya di gunakan untuk merender sebuah font
