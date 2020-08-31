@@ -13,12 +13,15 @@ module.exports = {
     entry: ["./src/js/script.js", "./src/sass/main.scss"], // Entry File yang akan di gunakan atau template yang akan di gunakan
     devServer: {
         // Untuk membuat server lokal
-        contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "src")],
+        contentBase: [path.join(__dirname, "dist"),
+            // path.join(__dirname, "src")
+        ],
         compress: true,
         watchContentBase: true,
         port: 4580,
         hot: true,
         inline: true,
+        writeToDisk: true,
         watchOptions: {
             poll: true,
             ignored: "/node_modules/"
@@ -27,7 +30,9 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, "./dist/"),
-        filename: "js/script.js", // Output dari javascriptnya
+        filename: "./script.js", // Output dari javascriptnya
+        hotUpdateChunkFilename: 'hot/hot-update.js', // membuat file hot-update.js dimasukan terlebih dahulu ke folder hot agar rapih
+        hotUpdateMainFilename: 'hot/hot-update.json' // membuat file hot-update.json dimasukan terlebih dahulu ke folder hot agar rapih
     },
     module: {
         rules: [{
@@ -35,7 +40,7 @@ module.exports = {
                 use: [{
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            publicPath: "./css/",
+                            publicPath: "./dist"
                         },
                     },
                     "css-loader",
@@ -45,12 +50,22 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|svg|gif|ico)$/,
                 exclude: /node_modules/,
-                loader: 'url-loader?name=images/[name].[ext]'
+                loader: 'file-loader',
+                options: {
+                    publicPath: "asset/images",
+                    outputPath: 'asset/images',
+                    name: '[name].[ext]',
+                },
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 exclude: /node_modules/,
-                loader: 'url-loader?name=fonts/[name].[ext]'
+                loader: 'file-loader',
+                options: {
+                    publicPath: "asset/fonts",
+                    outputPath: 'asset/fonts',
+                    name: '[name].[ext]',
+                },
             },
             {
                 test: /\.(es6|js|jsx)$/, // rule untuk js
@@ -63,16 +78,14 @@ module.exports = {
         ],
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new webpack.ProgressPlugin(), // untuk mengetahui sejauh mana progress compiled
         new MiniCssExtractPlugin({
-            filename: "./css/style.css", // output nama apa yang kita inginkan dari sass yang di atas
+            filename: "./style.css", // output nama apa yang kita inginkan dari sass yang di atas
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "src/html/index.html"), // template html mana yang akan kita render
             filename: path.resolve(__dirname, "dist/index.html"), // file yang akan di hasilkan
-        }),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [],
         }),
     ],
 };
